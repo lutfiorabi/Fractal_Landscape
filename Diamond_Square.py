@@ -2,14 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 
-# Parameters
-ITERATION = int(input())  # Amount of Iterations (grid size varies depending on the iterations count)
-SIZE = 2 ** ITERATION + 1  # 2^n+1 x 2^n+1 grid
-print(f"The Grid size will be {SIZE}x{SIZE}")
-SCALE_STEP = 2.0  # How much is the scale divided by in each iteration?
-
-directory = "results" # the directory in which the results are saved
-
 '''
 The diamond square algorithm.
 iterates through the grid through a diamond step followed by a square step. 
@@ -45,17 +37,16 @@ def diamond_square(size, scale_step, iterations):
 
     # initialise the corners to random values
     arr = np.zeros((size, size))
-    arr[0, 0] = np.random.rand() - 0.5
-    arr[0,-1] = np.random.rand() - 0.5
-    arr[-1, 0] = np.random.rand() - 0.5
-    arr[-1,-1] = np.random.rand() - 0.5
+    arr[0, 0] = (np.random.rand() - 0.5) * scale
+    arr[0, -1] = (np.random.rand() - 0.5) * scale
+    arr[-1, 0] = (np.random.rand() - 0.5) * scale
+    arr[-1, -1] = (np.random.rand() - 0.5) * scale
 
     show_results(arr)
 
     step_size = size - 1
 
     for i in range(iterations):
-
         diamond_step(arr, step_size, scale)
         square_step(arr, step_size, scale)
 
@@ -154,6 +145,16 @@ def show_results(terrain, i=0, last=False, colormap='terrain'):
 
 
 if __name__ == '__main__':
+
+    directory = "results"  # the directory in which the results are saved
+
+    # Parameters
+    print("Enter the number of iterations: ", end="")
+    ITERATION = int(input())  # Amount of Iterations (grid size varies depending on the iterations count)
+    SIZE = 2 ** ITERATION + 1  # 2^n+1 x 2^n+1 grid
+    print(f"The Grid size will be {SIZE}x{SIZE}")
+    SCALE_STEP = 2.0  # How much is the scale divided by in each iteration?
+
     if not os.path.exists(directory):
         os.makedirs(directory)
         print(f"Directory '{directory}' created.")

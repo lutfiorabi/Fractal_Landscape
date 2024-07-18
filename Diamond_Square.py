@@ -103,7 +103,14 @@ if __name__ == '__main__':
 
     # Parameters
     print("Enter the number of iterations: ", end="")
-    ITERATION = int(input())
+    while True:
+        ITERATION = int(input())
+        if ITERATION <= 0:
+            print("ITERATION must be greater than zero.\nEnter the number of iterations: ", end="")
+            continue
+        break
+
+
     SIZE = 2 ** ITERATION + 1  # 2^n+1 x 2^n+1 grid
     print(f"The Grid size will be {SIZE}x{SIZE}")
     SCALE_STEP = 2.0  # How much is the scale divided by in each iteration?

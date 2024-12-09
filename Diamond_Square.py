@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import os
+from tqdm import tqdm
 
 '''
 The diamond square algorithm.
@@ -48,7 +49,7 @@ def diamond_square(size, scale_step, iterations):
 
     step_size = size - 1
 
-    for i in range(iterations):
+    for i in tqdm(range(iterations)):
         diamond_step(arr, step_size, scale)
         square_step(arr, step_size, scale)
 
